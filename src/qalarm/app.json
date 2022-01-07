@@ -1,0 +1,8 @@
+{
+  "id": "qalarm",
+  "name": "Q Alarm",
+  "src": "qalarm.app.js",
+  "translation-requirements": [
+    "alarm", "back", "days of week", "delete", "hard mode", "hours", "minutes", "new", "repeat", "save", "seconds", "timer"
+  ]
+}

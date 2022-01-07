@@ -1,11 +1,5 @@
 // This file shows the alarm
 
-function formatTime(t) {
-  let hrs = Math.floor(t / 3600000);
-  let mins = Math.round((t / 60000) % 60);
-  return hrs + ":" + ("0" + mins).substr(-2);
-}
-
 function getCurrentTime() {
   let time = new Date();
   return (
@@ -37,18 +31,17 @@ function getRandomFromRange(
 }
 
 function showNumberPicker(currentGuess, randomNum) {
-  if (currentGuess == randomNum) {
-    E.showMessage("" + currentGuess + "\n PRESS ENTER", "Get to " + randomNum);
-  } else {
-    E.showMessage("" + currentGuess, "Get to " + randomNum);
-  }
+  E.showMessage("" + currentGuess, require("locale").translate("Get to") + " " + randomNum);
 }
 
 function showPrompt(msg, buzzCount, alarm) {
-  E.showPrompt(msg, {
-    title: alarm.timer ? "TIMER!" : "ALARM!",
-    buttons: { Sleep: true, Ok: false }, // default is sleep so it'll come back in 10 mins
-  }).then(function (sleep) {
+  let prompt = {
+    title: require("locale").translate(alarm.timer ? "TIMER" : "ALARM") + "!",
+  };
+  prompt.buttons[require("locale").translate("Sleep")] = true;
+  prompt.buttons[require("locale").translate("Ok")] = false;
+
+  E.showPrompt(msg, prompt).then(function (sleep) {
     buzzCount = 0;
     if (sleep) {
       if (alarm.ohr === undefined) alarm.ohr = alarm.t;
@@ -70,7 +63,7 @@ function showPrompt(msg, buzzCount, alarm) {
 
 function showAlarm(alarm) {
   if ((require("Storage").readJSON("setting.json", 1) || {}).quiet > 1) return; // total silence
-  let msg = formatTime(alarm.t);
+  let msg = require("locale").time(new Date(alarm.t));
   let buzzCount = 20;
   if (alarm.msg) msg += "\n" + alarm.msg + "!";
 
