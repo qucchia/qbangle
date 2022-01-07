@@ -13,6 +13,7 @@ let C = {
 
 function qmenu(src) {
   this.src = src;
+  this.getDynamicMenu = () => {};
 }
 
 qmenu.prototype.render = function() {
@@ -37,16 +38,30 @@ qmenu.prototype.render = function() {
         menu[item.title] = () => {
           this.setPath(item.id);
         };
+      } else if (item.type === "app") {
+        menu[item.title] = () => {
+          load(item.id + ".app.js");
+        };
+      } else if (item.type === "handler") {
+        let handler = require("Storage").readJSON("setting.json").handlers[item.id];
+        load(handler);
       }
     });
-
     E.showMenu(menu);
   }
 };
 
 qmenu.prototype.setPath = function(path) {
   this.path = path;
+  
   this.menu = require("Storage").readJSON(this.src)[path];
+  if (this.menu === "dynamic") {
+    this.menu = this.getDynamicMenu(path);
+  }
+  if (typeof this.menu === "object") {
+    E.showMessage("Oh no! The menu you were looking for was not found.");
+  }
+
   this.render();
 
   if (this.menu.type === "UpDown") return;

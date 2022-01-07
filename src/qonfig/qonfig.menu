@@ -15,10 +15,7 @@
       }
     ]
   },
-  "apps": {
-    "title": "Apps",
-    "items": "getApps"
-  },
+  "apps": "dynamic",
   "system": {
     "title": "System",
     "type": "UpDown",
