@@ -68,26 +68,31 @@ qmenu.prototype.render = function() {
     }
 
     this.menu.items.forEach((item) => {
-      if (item.type === "menu") {
-        menu[item.title] = () => {
-          this.setPath(item.id);
-        };
-      } else if (item.type === "app") {
-        menu[item.title] = () => {
-          load(item.id + ".app.js");
-        };
-      } else if (item.type === "handler") {
-        let handler = require("Storage").readJSON("setting.json").handlers[item.id];
-        load(handler);
-      } else if (item.type === "action") {
-        if (Array.isArray(item.arguments)) {
-          this[item.action].apply(this, item.arguments);
-        } else {
-          this[item.action](item.arguments);
-        }
-      }
+      menu[item.title] = () => {
+        this.selectItem(item);
+      };
     });
     E.showMenu(menu);
+  }
+};
+
+qmenu.prototype.selectItem = function(item) {
+  if (item.type === "menu") {
+    this.setPath(item.id);
+    this.render();
+  } else if (item.type === "app") {
+    load(item.id + ".app.js");
+  } else if (item.type === "handler") {
+    let handler = require("Storage").readJSON("setting.json").handlers[item.id];
+    load(handler);
+  } else if (item.type === "back") {
+    this.goBack();
+  } else if (item.type === "action") {
+    if (Array.isArray(item.arguments)) {
+      this[item.action].apply(this, item.arguments);
+    } else {
+      this[item.action](item.arguments);
+    }
   }
 };
 
@@ -134,19 +139,9 @@ qmenu.prototype.drawOption = function(number, text, y, height) {
 
 qmenu.prototype.handle123press = function(btn) {
   let item = this.menu.items[btn - 1];
-
-  if (item.type === "menu") {
-    this.setPath(item.id);
-    this.render();
-  } else if (item.type === "app") {
-    load(item.id + ".app.js");
-  } else if (item.type === "handler") {
-    let handler = require("Storage").readJSON("setting.json").handlers[item.id];
-    load(handler);
-  }
+  this.selectItem(item);
 };
 
 exports.init = function(src) {
   return new qmenu(src);
 };
-
