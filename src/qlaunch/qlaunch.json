@@ -1,0 +1,40 @@
+{
+  "": {
+    "type": "123",
+    "items": [{
+        "title": "Most used",
+        "type": "menu",
+        "id": "most-used"
+      },
+      {
+        "title": "Tools",
+        "type": "menu",
+        "id": "tools"
+      },
+      {
+        "title": "Other apps",
+        "type": "menu",
+        "id": "other-apps"
+      }
+    ]
+  },
+  "most-used": {
+    "type": "123",
+    "items": [{
+        "title": "Clock",
+        "type": "handler",
+        "id": "clock"
+      },
+      {
+        "title": "Stopwatch",
+        "type": "handler",
+        "id": "stopwatch"
+      },
+      {
+        "title": "Timer",
+        "type": "handler",
+        "id": "timer"
+      }
+    ]
+  }
+}
