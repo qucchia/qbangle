@@ -21,6 +21,7 @@
   },
   "system": {
     "title": "System",
+    "type": "UpDown",
     "items": [
       {
         "title": "Theme",
@@ -50,3 +51,4 @@
     ]
   }
 }
+

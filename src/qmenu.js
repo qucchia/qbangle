@@ -15,7 +15,7 @@ function qmenu(src) {
   this.src = src;
 }
 
-qmenu.prototype.render = function () {
+qmenu.prototype.render = function() {
   if (this.menu.type === "123") {
     g.clear();
     g.reset();
@@ -26,16 +26,31 @@ qmenu.prototype.render = function () {
     this.drawOption("2", this.menu.items[1].title, 115, 45);
     this.drawOption("3", this.menu.items[2].title, 180, 45);
   } else if (this.menu.type === "UpDown") {
+    let menu = {
+      "": {
+        title: this.menu.title,
+      }
+    };
 
+    this.menu.items.forEach((item) => {
+      if (item.type === "menu") {
+        menu[item.title] = () => {
+          this.setPath(item.id);
+        };
+      }
+    });
+
+    E.showMenu(menu);
   }
 };
 
-qmenu.prototype.setPath = function (path) {
+qmenu.prototype.setPath = function(path) {
   this.path = path;
   this.menu = require("Storage").readJSON(this.src)[path];
   this.render();
 
   if (this.menu.type === "UpDown") return;
+
   setWatch(() => {
     if (this.menu.type === "123") {
       this.handle123press(1);
@@ -61,7 +76,7 @@ qmenu.prototype.setPath = function (path) {
   });
 };
 
-qmenu.prototype.drawOption = function (number, text, y, height) {
+qmenu.prototype.drawOption = function(number, text, y, height) {
   g.
   // Rectangle
   drawRect(C.HOR_MARGIN, y, 240 - C.HOR_MARGIN, y + height)
@@ -75,7 +90,7 @@ qmenu.prototype.drawOption = function (number, text, y, height) {
     .drawString(text, 120, y + height / 2);
 };
 
-qmenu.prototype.handle123press = function (btn) {
+qmenu.prototype.handle123press = function(btn) {
   let item = this.menu.items[btn - 1];
 
   if (item.type === "menu") {
@@ -85,11 +100,10 @@ qmenu.prototype.handle123press = function (btn) {
     load(item.id + ".app.js");
   } else if (item.type === "handler") {
     let handler = require("Storage").readJSON("setting.json").handlers[item.id];
-    print("Opening " + handler + "...");
     load(handler);
   }
 };
 
-exports.init = function (src) {
+exports.init = function(src) {
   return new qmenu(src);
 };
