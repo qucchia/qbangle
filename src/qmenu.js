@@ -15,6 +15,33 @@ function qmenu(src) {
   this.src = src;
   this.getDynamicMenu = () => {};
   this.history = [];
+
+  setWatch(() => {
+    if (this.menu.type === "123") {
+      this.handle123press(1);
+    }
+  }, BTN1, {
+    repeat: true,
+    edge: "rising"
+  });
+
+  setWatch(() => {
+    if (this.menu.type === "123") {
+      this.handle123press(2);
+    }
+  }, BTN2, {
+    repeat: true,
+    edge: "rising"
+  });
+
+  setWatch(() => {
+    if (this.menu.type === "123") {
+      this.handle123press(3);
+    }
+  }, BTN3, {
+    repeat: true,
+    edge: "rising"
+  });
 }
 
 qmenu.prototype.render = function() {
@@ -84,30 +111,6 @@ qmenu.prototype.setPath = function(path, dontAddToHistory) {
   this.render();
 
   if (this.menu.type === "UpDown") return;
-
-  setWatch(() => {
-    if (this.menu.type === "123") {
-      this.handle123press(1);
-    }
-  }, BTN1, {
-    repeat: true
-  });
-
-  setWatch(() => {
-    if (this.menu.type === "123") {
-      this.handle123press(2);
-    }
-  }, BTN2, {
-    repeat: true
-  });
-
-  setWatch(() => {
-    if (this.menu.type === "123") {
-      this.handle123press(3);
-    }
-  }, BTN3, {
-    repeat: true
-  });
 };
 
 qmenu.prototype.goBack = function() {
