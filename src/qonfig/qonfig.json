@@ -1,0 +1,52 @@
+{
+  "home": {
+    "title": "Settings",
+    "type": "UpDown",
+    "items": [
+      {
+        "title": "Apps",
+        "type": "menu",
+        "id": "apps"
+      },
+      {
+        "title": "System",
+        "type": "menu",
+        "id": "system"
+      }
+    ]
+  },
+  "apps": {
+    "title": "Apps",
+    "items": "getApps"
+  },
+  "system": {
+    "title": "System",
+    "items": [
+      {
+        "title": "Theme",
+        "type": "menu",
+        "id": "theme"
+      },
+      {
+        "title": "LCD",
+        "type": "menu",
+        "id": "lcd"
+      },
+      {
+        "title": "Locale",
+        "type": "menu",
+        "id": "locale"
+      },
+      {
+        "title": "Set time",
+        "type": "menu",
+        "id": "time"
+      },
+      {
+        "title": "Handlers",
+        "type": "menu",
+        "id": "handlers"
+      }
+    ]
+  }
+}
