@@ -3,6 +3,6 @@
   "name": "Q Alarm",
   "src": "qalarm.app.js",
   "translation-requirements": [
-    "alarm", "back", "days of week", "delete", "hard mode", "hours", "minutes", "new", "repeat", "save", "seconds", "timer"
+    "alarm", "alarms", "auto snooze", "back", "days of week", "delete", "enabled", "get to", "hard mode", "hours", "minutes", "new alarm", "new timer", "repeat", "save", "seconds", "sleep", "timer"
   ]
 }
