@@ -18,6 +18,8 @@ function qmenu(src) {
 }
 
 qmenu.prototype.render = function() {
+  E.showMenu();
+
   if (this.menu.type === "123") {
     g.clear();
     g.reset();
