@@ -74,12 +74,14 @@
       {
         "title": "Dark BW",
         "type": "action",
-        "id": "set/theme/dark-bw"
+        "action": "set",
+        "arguments": [ "theme.preset", "dark-bw" ]
       },
       {
         "title": "Light BW",
         "type": "action",
-        "id": "set/theme/light-bw"
+        "action": "set",
+        "arguments": [ "theme.preset", "light-bw" ]
       },
       {
         "title": "< Back",

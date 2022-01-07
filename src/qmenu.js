@@ -52,6 +52,12 @@ qmenu.prototype.render = function() {
       } else if (item.type === "handler") {
         let handler = require("Storage").readJSON("setting.json").handlers[item.id];
         load(handler);
+      } else if (item.type === "action") {
+        if (Array.isArray(item.arguments)) {
+          this[item.action].apply(this, item.arguments);
+        } else {
+          this[item.action](item.arguments);
+        }
       }
     });
     E.showMenu(menu);
