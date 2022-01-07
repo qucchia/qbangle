@@ -1,0 +1,6 @@
+{
+  "id":"elementclk",
+  "name":"Element Clock",
+  "type":"clock",
+  "src":"elementclk.app.js"
+}
