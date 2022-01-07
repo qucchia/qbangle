@@ -46,6 +46,88 @@
         "id": "handlers"
       }
     ]
+  },
+  "theme" : {
+    "title": "Theme",
+    "type": "123",
+    "items": [
+      {
+        "title": "Choose a preset",
+        "type": "menu",
+        "id": "theme/preset"
+      },
+      {
+        "title": "Customise",
+        "type": "menu",
+        "id": "theme/custom"
+      },
+      {
+        "title": "< Back",
+        "type": "back"
+      }
+    ]
+  },
+  "theme/preset": {
+    "title": "Theme",
+    "type": "123",
+    "items": [
+      {
+        "title": "Dark BW",
+        "type": "action",
+        "id": "set/theme/dark-bw"
+      },
+      {
+        "title": "Light BW",
+        "type": "action",
+        "id": "set/theme/light-bw"
+      },
+      {
+        "title": "< Back",
+        "type": "back"
+      }
+    ]
+  },
+  "theme/custom": {
+    "title": "Theme",
+    "type": "UpDown",
+    "items": [
+      {
+        "title": "Foreground",
+        "type": "select",
+        "id": "foreground",
+        "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
+      },
+      {
+        "title": "Background",
+        "type": "select",
+        "id": "background",
+        "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
+      },
+      {
+        "title": "Foreground 2",
+        "type": "select",
+        "id": "foreground2",
+        "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
+      },
+      {
+        "title": "Background 2",
+        "type": "select",
+        "id": "background",
+        "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
+      },
+      {
+        "title": "FG Highlight",
+        "type": "select",
+        "id": "fg-highlight",
+        "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
+      },
+      {
+        "title": "BG Highlight",
+        "type": "select",
+        "id": "bg-highlight",
+        "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
+      }
+    ]
   }
 }
 
