@@ -14,6 +14,7 @@ let C = {
 function qmenu(src) {
   this.src = src;
   this.getDynamicMenu = () => {};
+  this.history = [];
 }
 
 qmenu.prototype.render = function() {
@@ -33,6 +34,10 @@ qmenu.prototype.render = function() {
       }
     };
 
+    if (this.history.length > 1) {
+      menu["< Back"] = () => this.goBack();
+    }
+
     this.menu.items.forEach((item) => {
       if (item.type === "menu") {
         menu[item.title] = () => {
@@ -51,9 +56,12 @@ qmenu.prototype.render = function() {
   }
 };
 
-qmenu.prototype.setPath = function(path) {
+qmenu.prototype.setPath = function(path, dontAddToHistory) {
   this.path = path;
-  
+  if (!dontAddToHistory) {
+    this.history.push(path);
+  }
+
   this.menu = require("Storage").readJSON(this.src)[path];
   if (this.menu === "dynamic") {
     this.menu = this.getDynamicMenu(path);
@@ -91,6 +99,11 @@ qmenu.prototype.setPath = function(path) {
   });
 };
 
+qmenu.prototype.goBack = function() {
+  this.history.pop();
+  this.setPath(this.history[this.history.length - 1], true);
+};
+
 qmenu.prototype.drawOption = function(number, text, y, height) {
   g.
   // Rectangle
@@ -122,3 +135,4 @@ qmenu.prototype.handle123press = function(btn) {
 exports.init = function(src) {
   return new qmenu(src);
 };
+
