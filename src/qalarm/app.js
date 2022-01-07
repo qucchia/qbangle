@@ -17,6 +17,8 @@ Alarm format:
 }
 */
 
+let translate = require("locale").translate;
+
 function formatTime(t) {
   mins = 0 | (t / 60000) % 60;
   hrs = 0 | (t / 3600000);
@@ -40,15 +42,15 @@ function getCurrentTime() {
 
 function showMainMenu() {
   const menu = {
-    "": { title: "Alarms" },
-    "< Back" : () => load(),
-    "New Alarm": () => showEditAlarmMenu(-1),
-    "New Timer": () => showEditTimerMenu(-1),
-  };
+    "": { title: translate("Alarms") },
+  }
+  menu["<" + translate("Back")] = () => load();
+  menu[translate("New Alarm")] = () => showEditAlarmMenu(-1);
+  menu[transleat("New Timer")] = () => showEditTimerMenu(-1);
   alarms.forEach((alarm, idx) => {
     let txt =
-      (alarm.timer ? "TIMER " : "ALARM ") +
-      (alarm.on ? "on  " : "off ") +
+      translate(alarm.timer ? "Timer" : "Alarm") + " " +
+      translate(alarm.on ? "on" : "off") + " " +
       (alarm.timer ? formatTimer(alarm.timer) : formatTime(alarm.t));
     menu[txt] = function () {
       if (alarm.timer) showEditTimerMenu(idx);
@@ -85,8 +87,9 @@ function showEditAlarmMenu(alarmIndex, alarm) {
 
   const menu = {
     "": { title: alarm.msg ? alarm.msg : "Alarms" },
-    "< Back" : showMainMenu,
-    Hours: {
+  };
+  menu["<" + translate("Back")] = showMainMenu;
+  menu[translate("Hours")] = {
       value: hrs,
       onchange: function (v) {
         if (v < 0) v = 23;
@@ -94,8 +97,8 @@ function showEditAlarmMenu(alarmIndex, alarm) {
         hrs = v;
         this.value = v;
       }, // no arrow fn -> preserve 'this'
-    },
-    Minutes: {
+    };
+  menu[translate("Minutes")] = {
       value: mins,
       onchange: function (v) {
         if (v < 0) v = 59;
@@ -103,8 +106,8 @@ function showEditAlarmMenu(alarmIndex, alarm) {
         mins = v;
         this.value = v;
       }, // no arrow fn -> preserve 'this'
-    },
-    Seconds: {
+    };
+  menu[translate("Seconds")] = {
       value: secs,
       onchange: function (v) {
         if (v < 0) v = 59;
@@ -112,28 +115,28 @@ function showEditAlarmMenu(alarmIndex, alarm) {
         secs = v;
         this.value = v;
       }, // no arrow fn -> preserve 'this'
-    },
-    Enabled: {
+    };
+  menu[translate("Enabled")] = {
       value: alarm.on,
       format: (v) => (v ? "On" : "Off"),
       onchange: (v) => (alarm.on = v),
-    },
-    Repeat: {
+    };
+  menu[translate("Repeat")] = {
       value: alarm.rp,
       format: (v) => (v ? "Yes" : "No"),
       onchange: (v) => (alarm.rp = v),
-    },
-    "Auto snooze": {
+    };
+  menu[translate("Auto snooze")] = {
       value: alarm.as,
       format: (v) => (v ? "Yes" : "No"),
       onchange: (v) => (alarm.as = v),
-    },
-    Hard: {
+    };
+  menu[translate("Hard")] = {
       value: alarm.hard,
       format: (v) => (v ? "Yes" : "No"),
       onchange: (v) => (alarm.hard = v),
-    },
-    "Days of week": () => showDaysMenu(alarmIndex, getAlarm()),
+    };
+  menu[translate("Days of week")] = () => showDaysMenu(alarmIndex, getAlarm());
   };
 
   function getAlarm() {
@@ -146,7 +149,7 @@ function showEditAlarmMenu(alarmIndex, alarm) {
     return alarm;
   }
 
-  menu["> Save"] = function () {
+  menu["> " + translate("Save")] = function() {
     if (newAlarm) alarms.push(getAlarm());
     else alarms[alarmIndex] = getAlarm();
     require("Storage").write("qalarm.json", JSON.stringify(alarms));
@@ -155,7 +158,7 @@ function showEditAlarmMenu(alarmIndex, alarm) {
   };
 
   if (!newAlarm) {
-    menu["> Delete"] = function () {
+    menu["> " + translate("Delete")] = function () {
       alarms.splice(alarmIndex, 1);
       require("Storage").write("qalarm.json", JSON.stringify(alarms));
       eval(require("Storage").read("qalarmcheck.js"));
@@ -167,15 +170,16 @@ function showEditAlarmMenu(alarmIndex, alarm) {
 
 function showDaysMenu(alarmIndex, alarm) {
   const menu = {
-    "": { title: alarm.msg ? alarm.msg : "Alarms" },
-    "< Back": () => showEditAlarmMenu(alarmIndex, alarm),
+    "": { title: alarm.msg ? alarm.msg : translate("Alarms") },
   };
 
+  menu["< " + translate("Back")] = () => showEditAlarmMenu(alarmIndex, alarm);
+
   for (let i = 0; i < 7; i++) {
-    let dayOfWeek = require("locale").dow({ getDay: () => i });
+    let dayOfWeek = require("locale").daysOfWeek(i);
     menu[dayOfWeek] = {
       value: alarm.daysOfWeek[i],
-      format: (v) => (v ? "Yes" : "No"),
+      format: (v) => (v ? translate("Yes") : translate("No")),
       onchange: (v) => (alarm.daysOfWeek[i] = v),
     };
   }
@@ -204,7 +208,7 @@ function showEditTimerMenu(timerIndex) {
   let secs = (0 | alarm.timer) % 60;
 
   const menu = {
-    "": { title: "Timer" },
+    "": { title: translate("Timer") },
     "< Back" : showMainMenu,
     Hours: {
       value: hrs,
