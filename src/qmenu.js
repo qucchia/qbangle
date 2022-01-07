@@ -66,8 +66,11 @@ qmenu.prototype.setPath = function(path, dontAddToHistory) {
   if (this.menu === "dynamic") {
     this.menu = this.getDynamicMenu(path);
   }
-  if (typeof this.menu === "object") {
-    E.showMessage("Oh no! The menu you were looking for was not found.");
+  if (typeof this.menu !== "object") {
+    E.showAlert("Oh no! The menu you were looking for was not found.").then(() => {
+      this.goBack();
+    });
+    return;
   }
 
   this.render();
