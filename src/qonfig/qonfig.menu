@@ -75,13 +75,13 @@
         "title": "Dark BW",
         "type": "action",
         "action": "set",
-        "arguments": [ "theme.preset", "dark-bw" ]
+        "arguments": [ "system.themePreset", "dark-bw" ]
       },
       {
         "title": "Light BW",
         "type": "action",
         "action": "set",
-        "arguments": [ "theme.preset", "light-bw" ]
+        "arguments": [ "system.themePreset", "light-bw" ]
       },
       {
         "title": "< Back",
@@ -96,37 +96,38 @@
       {
         "title": "Foreground",
         "type": "select",
-        "id": "foreground",
+	"action": "set",
+        "arguments": "system.theme.foreground",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "Background",
         "type": "select",
-        "id": "background",
+        "arguments": "system.theme.background",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "Foreground 2",
         "type": "select",
-        "id": "foreground2",
+        "arguments": "system.theme.foreground2",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "Background 2",
         "type": "select",
-        "id": "background",
+	"arguments": "system.theme.background2",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "FG Highlight",
         "type": "select",
-        "id": "fg-highlight",
+	"arguments": "system.theme.fgHighlight",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "BG Highlight",
         "type": "select",
-        "id": "bg-highlight",
+	"arguments": "system.theme.bgHighlight",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       }
     ]

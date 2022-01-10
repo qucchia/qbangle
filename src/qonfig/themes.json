@@ -1,0 +1,20 @@
+{
+  "light-bw": {
+    "foreground": 0,
+    "background": 65535,
+    "foreground2": 0,
+    "background2": 53247,
+    "fgHighlight": 0,
+    "bgHighlight": 2047,
+    "dark": false
+  },
+  "dark-bw": {
+    "foreground": 65535,
+    "background": 0,
+    "foreground2": 2047,
+    "background2": 0,
+    "fgHighlight": 65535,
+    "bgHighlight": 31,
+    "dark": true
+  }
+}
