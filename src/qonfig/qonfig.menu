@@ -97,40 +97,39 @@
         "title": "Foreground",
         "type": "select",
 	"action": "set",
-        "arguments": "system.theme.foreground",
+        "arguments": "system.theme.fg",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "Background",
         "type": "select",
-        "arguments": "system.theme.background",
+        "arguments": "system.theme.bg",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "Foreground 2",
         "type": "select",
-        "arguments": "system.theme.foreground2",
+        "arguments": "system.theme.fg2",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "Background 2",
         "type": "select",
-	"arguments": "system.theme.background2",
+	"arguments": "system.theme.bg2",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "FG Highlight",
         "type": "select",
-	"arguments": "system.theme.fgHighlight",
+	"arguments": "system.theme.fgH",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       },
       {
         "title": "BG Highlight",
         "type": "select",
-	"arguments": "system.theme.bgHighlight",
+	"arguments": "system.theme.bgH",
         "options": [ "white", "black", "yellow", "magenta", "cyan", "blue", "green", "red" ]
       }
     ]
   }
 }
-

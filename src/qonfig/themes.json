@@ -1,20 +1,20 @@
 {
   "light-bw": {
-    "foreground": 0,
-    "background": 65535,
-    "foreground2": 0,
-    "background2": 53247,
-    "fgHighlight": 0,
-    "bgHighlight": 2047,
+    "fg": 0,
+    "bg": 65535,
+    "fg2": 0,
+    "bg2": 53247,
+    "fgH": 0,
+    "bgH": 2047,
     "dark": false
   },
   "dark-bw": {
-    "foreground": 65535,
-    "background": 0,
-    "foreground2": 2047,
-    "background2": 0,
-    "fgHighlight": 65535,
-    "bgHighlight": 31,
+    "fg": 65535,
+    "bg": 0,
+    "fg2": 2047,
+    "bg2": 0,
+    "fgH": 65535,
+    "bgH": 31,
     "dark": true
   }
 }

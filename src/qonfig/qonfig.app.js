@@ -3,21 +3,30 @@ let config = require("Storage").readJSON("config.json");
 let qmenu = require("qmenu").init("qonfig.menu");
 qmenu.setPath("home");
 
-// Converts settings to official Settings app format and writes them
-function convertToBangleSettings() {
-  let setting = {};
-  setting.theme = {
-    fg: config.system.theme.foreground,
-    bg: config.system.theme.background,
-    fg2: config.system.theme.foreground2,
-    bg2: config.system.theme.background2,
-    fgH: config.system.theme.fgHighlight,
-    bgH: config.system.theme.bgHighlight,
-    dark: config.system.theme.dark,
-  };
+function writeConfig() {
+  require("Storage").write("config.json", config);
+
+  // Convert settings to official Settings app format
+  let setting = require("Storage").readJSON("setting.json");
+  setting.theme = config.system.theme;
 
   print(setting);
   require("Storage").write("setting.json", setting);
+}
+
+function updateTheme(theme) {
+  g.theme = theme;
+  delete g.reset;
+  g._reset = g.reset;
+  g.reset = function(n) {
+    return g._reset().setColor(theme.fg).setBgColor(theme.bg);
+  };
+  g.clear = function(n) {
+    if (n) g.reset();
+    return g.clearRect(0,0,g.getWidth(),g.getHeight());
+  };
+  g.clear(1);
+  qmenu.render();
 }
 
 qmenu.getDynamicMenu = (path) => {
@@ -55,22 +64,15 @@ qmenu.set = (prop, value) => {
 
   c[propArray[propArray.length - 1]] = value;
 
-  print(config);
-
   if (prop === "system.themePreset") {
     config.system.theme = require("Storage").readJSON("themes.json")[value];
-    g.theme = th;
-    settings.theme = th;
-    updateSettings();
-    delete g.reset;
-    g._reset = g.reset;
-    g.reset = function(n) { return g._reset().setColor(th.fg).setBgColor(th.bg); };
-    g.clear = function(n) { if (n) g.reset(); return g.clearRect(0,0,g.getWidth(),g.getHeight()); };
-    g.clear(1);
-    Bangle.drawWidgets();
-  }
+    updateTheme(config.system.theme);
+  } else if (prop.startsWith("system.theme")) {
+    updateTheme(config.system.theme);
+  } 
 
-  require("Storage").write("config.json", config);
-  convertToBangleSettings();
+  print(config);
+
+  writeConfig();
 };
 
