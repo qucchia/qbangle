@@ -7,8 +7,6 @@
 
 let C = {
   HOR_MARGIN: 25,
-  X: 25,
-  Y: 50,
 };
 
 function qmenu(src) {
