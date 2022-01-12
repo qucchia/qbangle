@@ -128,9 +128,9 @@ qmenu.prototype.drawOption = function(number, text, y, height) {
   // Rectangle
   drawRect(C.HOR_MARGIN, y, 240 - C.HOR_MARGIN, y + height)
     // Circle
-    .setColor("#000")
+    .setColor(g.theme.bg)
     .fillCircle(C.HOR_MARGIN, y, 10)
-    .setColor("#fff")
+    .setColor(g.theme.fg)
     .drawCircle(C.HOR_MARGIN, y, 10)
     .drawString(number, C.HOR_MARGIN + 2, y)
     // Text
